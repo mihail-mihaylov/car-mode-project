@@ -6,9 +6,7 @@
 I2C i2c(I2C_SDA, I2C_SCL);
  
 DigitalOut myled(LED1);
-DigitalOut led1(LED1);
-DigitalOut led(LED2);
-DigitalOut led3(LED3);
+DigitalOut led2(D13);
  
 Serial pc(SERIAL_TX, SERIAL_RX);
  
@@ -16,8 +14,6 @@ int address = 96;
 char data_buff[10];
 int tmp;
 
-
- 
 int FindAddress(void) {
 int i = 1;
 int int_address = 0;
