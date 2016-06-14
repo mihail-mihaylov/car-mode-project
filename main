@@ -2,7 +2,10 @@
  
 I2C i2c(I2C_SDA, I2C_SCL);
  
-DigitalOut myled(LED1);
+
+DigitalOut led1(LED1);
+DigitalOut led2(D13);
+
  
 Serial pc(SERIAL_TX, SERIAL_RX);
  
@@ -87,24 +90,25 @@ char b_buf[20];
  
   tmp = FindAddress();
   pc.printf("Address:%d\r\n", tmp);
-  wait(0.2); myled = ~myled; 
+  wait(0.2); //myled = ~myled; 
   
   tmp = ReadID();
   pc.printf("ID:%d\r\n", tmp);
-  wait(0.2); myled = ~myled; 
+  wait(0.2); //myled = ~myled; 
   
   tmp = ReadFRM();
   pc.printf("FRM:%d\r\n", tmp);
-  wait(0.2); myled = ~myled; 
+  wait(0.2); //myled = ~myled; 
   
   Clr_scr();
-  wait(0.2); myled = ~myled;
+  wait(0.2); //myled = ~myled;
   
   Write_to_scr(2,0,'1');
-  wait(0.2); myled = ~myled;
+  wait(0.2); //myled = ~myled;
  
   Str_to_scr(1,0,"Hello", 5);
-  wait(0.2); myled = ~myled;
+  wait(0.2); //myled = ~myled;
+    led2 = 0;
  
   while(1) {
     tmp = ReadBtn();
@@ -114,20 +118,34 @@ char b_buf[20];
     
     if(tmp == 14)
        {
-            Str_to_scr(1, 0, "MENU:", 5);
+            Str_to_scr(1, 0, "MODE:", 5);
             Str_to_scr(2, 0, "- comfort", 9);
+            led2 = 1;
+
        }
        
        if(tmp == 13)
        {
-            Str_to_scr(1, 0, "MENU:", 5);
+            Str_to_scr(1, 0, "MODE:", 5);
             Str_to_scr(2, 0, "- sport  ", 9);
+            led2 = 1;
+
        }
        
        if(tmp == 11)
        {
-            Str_to_scr(1, 0, "MENU:", 5);
+            Str_to_scr(1, 0, "MODE:", 5);
             Str_to_scr(2, 0, "- eco    ", 9);
+            led2 = 1;
+
+       }
+       
+       if(tmp == 7)
+       {
+            Str_to_scr(1, 0, "MODE:", 5);
+            Str_to_scr(2, 0, "- manual ", 9);
+            led2 = 0;
+
        }
     wait(0.1);
   }
